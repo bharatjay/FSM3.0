@@ -13,11 +13,12 @@ public class SubscriptExpression extends ValueExpression
 		implements Comparable<ValueExpression>, IUnaryExpression<ValueExpression> {
 	private String name;
 	private ValueExpression expression;
+	private ValueExpression index_expr;
 	int index;
 
-	public SubscriptExpression(String name, ValueExpression expression) {
+	public SubscriptExpression(String name, ValueExpression index_expr) {
 		this.name = name;
-		this.expression = expression;  // (Integer) expression.getValue();
+		this.index_expr = index_expr;  // (Integer) expression.getValue();
 	}
 
 	public String getName() {
@@ -31,9 +32,12 @@ public class SubscriptExpression extends ValueExpression
 	@Override
 	public Boolean evaluate(Context context) {
 		List<String> list = new ArrayList<>();
+		
 		ValueExpression expr = context.getCurrentState().getVector().get(name);
-		expression.evaluate(context);
-		index = (int) expression.getValue();
+		
+		index_expr.evaluate(context);
+		index = (int) index_expr.getValue();
+		
 		String listString = (String) expr.getValue();
 		String[] listValue = listString.split(" |\\]|\\[");
 		for (int i = 0; i < listValue.length; i++) {
@@ -57,7 +61,8 @@ public class SubscriptExpression extends ValueExpression
 			}
 		}
 		else {
-			setExpression(new IntegerValueExpression(Integer.MIN_VALUE));
+			throw new IllegalArgumentException("Subscript out of range!"); 
+			// setExpression(new IntegerValueExpression(Integer.MIN_VALUE));
 		}
 		return true;
 	}
