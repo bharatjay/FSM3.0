@@ -7,8 +7,10 @@ chosen by the user. Properties are similar to those of propositional temporal lo
 safety properties.  In the Readers-Writers program, for example, where r = number of running readers and w =
 the number of running writers,  the controller for readers and writers should satisfy:
 
-G [								// means that all states should satisfy: <br/> 
-    (r > 0 -> w = 0) &&            // no writers run when reads are in progress    <br/>
-    (w > 0  -> r = 0) &&           // no readers run when writes are in progress   <br/>
-    (w = 0 || w = 1)               // at most one write operation at a time        <br/>
-  ]  
+``` 
+G [					           // means that all states should satisfy:  
+    (r > 0 -> w = 0) &&            // no writers run when reads are in progress     
+    (w > 0  -> r = 0) &&           // no readers run when writes are in progress   
+    (w = 0 || w = 1)               // at most one write operation at a time       
+ ]  
+```
