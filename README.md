@@ -8,7 +8,7 @@ safety properties.  In the Readers-Writers program, for example, where r = numbe
 the number of running writers,  the controller for readers and writers should satisfy:
 
 ``` 
-G [	                           //  all states should satisfy 3 properties:  
+G [	                           // all states should satisfy 3 properties:  
     (r > 0 -> w = 0) &&            // no writers run when reads are in progress     
     (w > 0  -> r = 0) &&           // no readers run when writes are in progress   
     (w = 0 || w = 1)               // at most one write operation at a time       
