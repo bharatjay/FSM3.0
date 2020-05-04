@@ -359,7 +359,7 @@ public class FSMAbstractionGranularity extends ViewPart {
 		vcanvasText.setText("600");
 
 		rootScrollComposite.setMinSize(mainComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		statusLineManager.setMessage("Developed at Amrita Vishwa Vidyapeetham, India");
+		//statusLineManager.setMessage("Developed at Amrita Vishwa Vidyapeetham, India");
 
 		// Action Listeners
 		
