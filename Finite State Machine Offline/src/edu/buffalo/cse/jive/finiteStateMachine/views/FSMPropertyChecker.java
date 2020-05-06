@@ -288,7 +288,7 @@ public class FSMPropertyChecker extends ViewPart {
 		GridData vcd = new GridData();
 		vcd.widthHint = 40;
 		vcanvasText.setLayoutData(vcd);
-		vcanvasText.setText("1800");
+		vcanvasText.setText("750");
 
 		statusLabel = new Label(ev2Composite, SWT.FILL);
 		statusLabel.setText("StatusUpdate:");

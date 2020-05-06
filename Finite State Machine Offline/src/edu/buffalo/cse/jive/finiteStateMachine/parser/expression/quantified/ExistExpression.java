@@ -2,6 +2,7 @@ package edu.buffalo.cse.jive.finiteStateMachine.parser.expression.quantified;
 import edu.buffalo.cse.jive.finiteStateMachine.models.Context;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.core.VariableExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.expression.Expression;
+import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.value.ValueExpression;
 
 
 public class ExistExpression extends QuantifiedVariable {
@@ -37,13 +38,19 @@ public class ExistExpression extends QuantifiedVariable {
 		// TODO Auto-generated method stub
 		if(from==-1)
 		{
-			String listString = (String) variableExpression.getValue();
+			variableExpression.evaluate(context);
+			String listString = (String) ((ValueExpression) variableExpression).getValue();
+	
 			String[] listValue = listString.split(" |\\]|\\[");
 			QuantifiedVarsMap.put(this.quantifiedVariableName,listValue[0]);
 			for(String qvar:listValue) {
 				if(!(qvar.equals(" ") || qvar.equals("")))
 					{Boolean currentResult;
-					QuantifiedVarsMap.replace(quantifiedVariableName,qvar);
+					try {
+						QuantifiedVarsMap.replace(quantifiedVariableName,Integer.parseInt(qvar)); }
+					catch (NumberFormatException e) {
+					    QuantifiedVarsMap.replace(quantifiedVariableName,qvar);
+					}
 					currentResult = exp.evaluate(context);				
 					if(currentResult) {return true;}
 			}
