@@ -3,6 +3,7 @@ package edu.buffalo.cse.jive.finiteStateMachine.views;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +54,8 @@ import edu.buffalo.cse.jive.finiteStateMachine.parser.Parser;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.TopDownParser;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.expression.Expression;
 import edu.buffalo.cse.jive.finiteStateMachine.util.TemporaryDataTransporter;
+// import edu.buffalo.cse.jive.finiteStateMachine.views.FSMAbstractionGranularity.State;
+import edu.buffalo.cse.jive.finiteStateMachine.models.State;
 import net.sourceforge.plantuml.SourceStringReader;
 
 /**
@@ -418,6 +421,7 @@ public class FSMPropertyChecker extends ViewPart {
 		errorText.setText("                                                                ");
 		try {
 			TemporaryDataTransporter.shouldHighlight = false;
+			TemporaryDataTransporter.F_success_states = new HashSet<State>();
 			Set<String> keyAttributes = readKeyAttributes(kvText, paText);
 			List<Expression> expressions = null;
 			try {

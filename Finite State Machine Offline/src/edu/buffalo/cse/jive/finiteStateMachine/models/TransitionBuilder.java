@@ -37,12 +37,14 @@ public class TransitionBuilder {
 	}
 
 	private void addInitialState(State state, Status status) {
-		if (status.equals(Status.VALID))
+		if (status.equals(Status.VALID) || status.equals(Status.VALID_A))
 			this.transitions.append("(*) --> " + "\"" + state.toString() + "\"");
-		else if(status.equals(Status.MARKED))
-		this.transitions.append("(*) --> " + "\"" + state.toString() + "\"" + " #LimeGreen");
-		else
-			this.transitions.append("(*) --> " + "\"" + state.toString() + "\"" + " #red");
+		else if (status.equals(Status.MARKED))
+				this.transitions.append("(*) --> " + "\"" + state.toString() + "\"" + " #LimeGreen");
+			else
+				if (status.equals(Status.VALID_A))
+					 this.transitions.append("(*) --> " + "\"" + state.toString() + "\"" + " #LightSkyBlue");
+				else this.transitions.append("(*) --> " + "\"" + state.toString() + "\"" + " #red");
 		addNewLine();
 	}
 
@@ -53,7 +55,14 @@ public class TransitionBuilder {
 	private void addTransition(State state1, State state2, Status status) {
 		if (status.equals(Status.INVALID)) {
 			addColorTransition(state1, state2, "red");
-		} else {
+		} else 
+		if (status.equals(Status.VALID_A)) {
+				addColorTransition(state1, state2, "LightSkyBlue");
+		} else 
+		if (TemporaryDataTransporter.F_success_states.contains(state2)) {
+			addColorTransition(state1, state2, "LimeGreen");
+		}
+		else {
 			addNoColorTransition(state1, state2);
 		}
 	}

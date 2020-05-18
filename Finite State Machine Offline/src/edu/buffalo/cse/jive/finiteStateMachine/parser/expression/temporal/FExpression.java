@@ -11,6 +11,7 @@ import edu.buffalo.cse.jive.finiteStateMachine.models.Context;
 import edu.buffalo.cse.jive.finiteStateMachine.models.State;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.expression.Expression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.expression.UnaryExpression;
+import edu.buffalo.cse.jive.finiteStateMachine.util.TemporaryDataTransporter;
 
 /**
  * @author Shashank Raghunath
@@ -54,7 +55,11 @@ public class FExpression extends UnaryExpression<Expression> {
 		for (State n : states.get(curr)) { nextState = n;  break; }
 		
 		boolean isMatch = getExpression().evaluate(new Context(curr, nextState, states));
-		if(isMatch) return 2;
+		
+		if(isMatch) {
+			TemporaryDataTransporter.F_success_states.add(curr);
+			return 2;
+		}
 		
 		if(!states.get(curr).isEmpty()) {
 			

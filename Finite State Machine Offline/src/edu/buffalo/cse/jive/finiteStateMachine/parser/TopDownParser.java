@@ -1,9 +1,11 @@
 package edu.buffalo.cse.jive.finiteStateMachine.parser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.buffalo.cse.jive.finiteStateMachine.models.State;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.ListOperations.Append;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.ListOperations.InExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.ListOperations.ListEqualityExpression;
@@ -32,6 +34,7 @@ import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.relational.Grea
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.relational.LessThanEqualToExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.relational.LessThanExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.relational.NotEqualityExpression;
+import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.temporal.AExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.temporal.EExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.temporal.FExpression;
 import edu.buffalo.cse.jive.finiteStateMachine.parser.expression.temporal.GExpression;
@@ -342,8 +345,8 @@ class BF {
 			lexer.lex(); // skip over ]
 			expression = new GExpression(e.getExpression());
 			break;
-		case Token.X_OP: // X
-			lexer.lex(); // skip over 'X'
+		case Token.A_OP: // The A operator
+			lexer.lex(); // skip over 'A'
 			if (lexer.getNextToken() != Token.LEFT_BOX)
 				throw new IllegalArgumentException("Syntax Error in Properties");
 			lexer.lex(); // skip over [
@@ -351,8 +354,19 @@ class BF {
 			if (lexer.getNextToken() != Token.RIGHT_BOX)
 				throw new IllegalArgumentException("Syntax Error in Properties");
 			lexer.lex(); // skip over ]
-			expression = new XExpression(e.getExpression());
+			expression = new AExpression(e.getExpression());
 			break;
+		case Token.X_OP: // X
+			lexer.lex(); // skip o			lexer.lex(); // skip over 'G'
+			if (lexer.getNextToken() != Token.LEFT_BOX)
+				throw new IllegalArgumentException("Syntax Error in Properties");
+			lexer.lex(); // skip over [
+			e = new Imply(lexer);
+			if (lexer.getNextToken() != Token.RIGHT_BOX)
+				throw new IllegalArgumentException("Syntax Error in Properties");
+			lexer.lex(); // skip over ]
+			expression = new GExpression(e.getExpression());
+			break; 
 		case Token.U_OP: // X
 			lexer.lex(); // skip over 'X'
 			if (lexer.getNextToken() != Token.LEFT_BOX)

@@ -56,15 +56,15 @@ class Token {
 	public static final int EXISTS=45;
 	public static final int COLON=46;
 	public static final int FOR=47;
-
+	public static final int A_OP=48;
 	
 
 	private static String[] lexemes = { ";", ",", "+", "-", "*", "/", "=", ">", "<", "<=", ">=", "==", "!=", "(", ")",
 			"{", "}", "id", "int_lit", "&&", "||", "->", "F", "G", "U", "X", "[", "]", "!", "end", "'",
-			"n_int_lit", "string_lit", "E", "in", ".", "++", "size", "min", "max", "hash", "~>", "~~>", "P","all","exists",":","for"};//Added by Aditya All and Exist
+			"n_int_lit", "string_lit", "E", "in", ".", "++", "size", "min", "max", "hash", "~>", "~~>", "P","all","exists",":","for", "A"};//Added by Aditya All and Exist
 
 	public static String toString(int i) {
-		if (i < 0 || i > 46)
+		if (i < 0 || i > 48)
 			return "";
 		else
 			return lexemes[i];

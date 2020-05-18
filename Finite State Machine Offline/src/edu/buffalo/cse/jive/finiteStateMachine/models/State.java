@@ -25,7 +25,9 @@ public class State {
 	public enum Status{
 		MARKED,
 		VALID,
-		INVALID
+		INVALID,
+		VALID_A,      
+		INVALID_A
 	}
 
 	public State() {

@@ -41,6 +41,9 @@ public class Lexer {
 		if (Character.isLetter(ch)) {
 			ident = ident();
 			switch (ident) {
+			case "A":
+				nextToken = Token.A_OP;
+				break;
 			case "F":
 				nextToken = Token.F_OP;
 				break;
